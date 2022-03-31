@@ -23,12 +23,20 @@ export const TOKEN_MINTS: Array<{
   };
 });
 
+const filteredMarkets = Markets.filter(item => {
+  return (
+      item ["name"] === "TRYB/USDT" ||
+      item ["name"] === "USDT/USDC" ||
+      item ["name"] === "WBRZ/USDL" 
+  )
+});
+
 export const MARKETS: Array<{
   address: PublicKey;
   name: string;
   programId: PublicKey;
   deprecated: boolean;
-}> = Markets.map((market) => {
+}> = filteredMarkets.map((market) => {
   return {
     address: new PublicKey(market.address),
     name: market.name,
